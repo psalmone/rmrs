@@ -1,19 +1,33 @@
-<nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+<nav x-data="{ open: false }" class="bg-[#071109]/95 backdrop-blur-xl border-b border-white/10">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                    <a href="{{ route('dashboard') }}" class="flex items-center gap-2.5">
+                        <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-amber-500 to-amber-400 p-0.5">
+                            <div class="w-full h-full bg-[#09150c] rounded-[10px] flex items-center justify-center">
+                                <x-application-logo class="w-4 h-4 text-amber-400" />
+                            </div>
+                        </div>
+                        <span class="font-bold text-white text-sm">Malaptw <span class="text-amber-400">RiceMill</span></span>
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-slate-300 hover:text-white border-amber-400">
                         {{ __('Dashboard') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('palay-intakes.index')" :active="request()->routeIs('palay-intakes.*')" class="text-slate-300 hover:text-white border-amber-400">
+                        {{ __('Palay Intakes') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('milling-batches.index')" :active="request()->routeIs('milling-batches.*')" class="text-slate-300 hover:text-white border-amber-400">
+                        {{ __('Milling Runs') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('sales.index')" :active="request()->routeIs('sales.*')" class="text-slate-300 hover:text-white border-amber-400">
+                        {{ __('Sales / POS') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -22,8 +36,9 @@
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                        <button class="inline-flex items-center px-3 py-2 border border-white/10 text-xs font-semibold rounded-xl text-slate-300 bg-white/5 hover:text-white hover:bg-white/10 focus:outline-none transition ease-in-out duration-150">
                             <div>{{ Auth::user()->name }}</div>
+
 
                             <div class="ms-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -69,6 +84,15 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('palay-intakes.index')" :active="request()->routeIs('palay-intakes.*')">
+                {{ __('Palay Intakes') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('milling-batches.index')" :active="request()->routeIs('milling-batches.*')">
+                {{ __('Milling Runs') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('sales.index')" :active="request()->routeIs('sales.*')">
+                {{ __('Sales / POS') }}
             </x-responsive-nav-link>
         </div>
 
