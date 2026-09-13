@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Malaptw RiceMill System — Enterprise Operations & Management</title>
-    <meta name="description" content="Malaptw RiceMill System — Manage rice milling operations, raw palay intake, milled rice inventory, sales, and analytics in one unified platform.">
+    <title>Malapote Ricemill System — Enterprise Operations & Management</title>
+    <meta name="description" content="Malapote Ricemill System — Manage rice milling operations, raw palay intake, milled rice inventory, sales, and analytics in one unified platform.">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -70,8 +70,8 @@
                 </div>
                 <div>
                     <div class="flex items-center gap-2">
-                        <span class="text-lg font-black tracking-tight text-white group-hover:text-amber-400 transition-colors">Malaptw</span>
-                        <span class="text-xs font-bold px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20">RiceMill</span>
+                        <span class="text-lg font-black tracking-tight text-white group-hover:text-amber-400 transition-colors">Malapote</span>
+                        <span class="text-xs font-bold px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20">Ricemill</span>
                     </div>
                     <p class="text-[10px] text-slate-400 uppercase tracking-widest font-semibold">Enterprise Operations Portal</p>
                 </div>
@@ -128,7 +128,7 @@
                                 In One Single System.
                             </h1>
                             <p class="text-base sm:text-lg text-slate-300 max-w-xl font-normal leading-relaxed pt-2">
-                                Engineered specifically for <strong class="text-amber-300 font-semibold">Malaptw RiceMill</strong>. Automate paddy intake weights, monitor milling yield recovery, track multi-variety rice sacks, and generate ledger-ready financial reports.
+                                Engineered specifically for <strong class="text-amber-300 font-semibold">Malapote Ricemill</strong>. Automate paddy intake weights, monitor milling yield recovery, track multi-variety rice sacks, and generate ledger-ready financial reports.
                             </p>
                         </div>
 
@@ -391,9 +391,9 @@
                         <x-application-logo class="w-4 h-4 text-amber-400" />
                     </div>
                 </div>
-                <span class="text-sm font-bold text-slate-300">Malaptw RiceMill System</span>
+                <span class="text-sm font-bold text-slate-300">Malapote Ricemill System</span>
             </div>
-            <p class="text-xs text-slate-500">&copy; {{ date('Y') }} Malaptw RiceMill. Built with Laravel {{ app()->version() }}. All rights reserved.</p>
+            <p class="text-xs text-slate-500">&copy; {{ date('Y') }} Malapote Ricemill. Built with Laravel {{ app()->version() }}. All rights reserved.</p>
         </div>
     </footer>
 

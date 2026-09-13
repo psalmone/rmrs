@@ -45,7 +45,7 @@
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-white/10 gap-4">
                     <div>
                         <div class="flex items-center gap-2">
-                            <span class="text-xs font-bold uppercase tracking-wider text-blue-400">Malaptw Rice Mill Delivery & Sales Invoice</span>
+                            <span class="text-xs font-bold uppercase tracking-wider text-blue-400">Malapote Ricemill Delivery & Sales Invoice</span>
                         </div>
                         <div class="text-xl font-bold text-white mt-1">{{ $sale->customer_name }}</div>
                         @if($sale->customer)

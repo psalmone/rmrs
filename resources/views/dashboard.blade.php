@@ -5,7 +5,7 @@
                 <h2 class="font-extrabold text-2xl text-white tracking-tight">
                     {{ __('Operations Management Dashboard') }}
                 </h2>
-                <p class="text-xs text-slate-400 mt-0.5">Welcome back, {{ Auth::user()->name }} &bull; Malaptw Rice Mill Plant</p>
+                <p class="text-xs text-slate-400 mt-0.5">Welcome back, {{ Auth::user()->name }} &bull; Malapote Ricemill Plant</p>
             </div>
             <div class="flex items-center gap-2.5">
                 <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
@@ -18,6 +18,38 @@
 
     <div class="py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+
+            <!-- ====== LOW STOCK ALERT BANNER ====== -->
+            @if(isset($lowStockItems) && $lowStockItems->isNotEmpty())
+                <div class="p-5 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-rose-200 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div class="flex items-center gap-3.5">
+                        <div class="p-2.5 rounded-xl bg-rose-500/20 text-rose-400 flex-shrink-0 animate-bounce">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                                Critical Low Stock Alert: {{ $lowStockItems->count() }} item(s) below reorder threshold
+                            </h3>
+                            <p class="text-xs text-rose-300/80 mt-0.5">
+                                Items: 
+                                @foreach($lowStockItems as $lItem)
+                                    <span class="font-semibold text-white">{{ $lItem->name }} ({{ number_format($lItem->current_stock) }} {{ $lItem->unit }})</span>{{ !$loop->last ? ',' : '' }}
+                                @endforeach
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 flex-shrink-0">
+                        <a href="{{ route('inventory.index', ['filter' => 'low_stock']) }}" class="px-4 py-2 rounded-xl bg-rose-500 hover:bg-rose-400 text-slate-950 font-bold text-xs shadow-lg shadow-rose-500/20 transition">
+                            View Low Stock
+                        </a>
+                        <a href="{{ route('inventory.adjust.form') }}" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold text-xs transition">
+                            Adjust Stock
+                        </a>
+                    </div>
+                </div>
+            @endif
             
             <!-- ====== TOP 4 KPI CARDS ====== -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">

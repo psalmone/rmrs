@@ -1,129 +1,139 @@
 <x-guest-layout>
-    <div class="mb-6 text-center">
-        <h2 class="text-xl font-extrabold text-white tracking-tight">Staff Account Registration</h2>
-        <p class="text-xs text-slate-400 mt-1">Create an account for authorized mill operators or clerks</p>
+<style>
+    .form-title { font-size: 22px; font-weight: 700; color: #f1f5f9; margin-bottom: 4px; }
+    .form-subtitle { font-size: 13px; color: #64748b; margin-bottom: 28px; }
+    .form-group { margin-bottom: 16px; }
+    .form-label {
+        display: block; font-size: 12px; font-weight: 600; color: #94a3b8;
+        margin-bottom: 7px; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .input-wrap { position: relative; }
+    .input-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #475569; pointer-events: none; }
+    .form-input {
+        width: 100%; padding: 10px 14px 10px 38px;
+        background: #1a1f2e; border: 1px solid #2d3448; border-radius: 8px;
+        font-size: 14px; color: #e2e8f0; outline: none;
+        transition: border-color 0.15s, box-shadow 0.15s; font-family: inherit;
+    }
+    .form-input::placeholder { color: #475569; }
+    .form-input:focus { border-color: #f59e0b; box-shadow: 0 0 0 3px rgba(245,158,11,0.12); }
+    .form-error { font-size: 12px; color: #f87171; margin-top: 5px; }
+    .btn-submit {
+        display: flex; align-items: center; justify-content: center; gap: 8px;
+        width: 100%; padding: 11px 20px; background: #f59e0b;
+        border: none; border-radius: 8px; font-size: 14px; font-weight: 700; color: #1a1f2e;
+        cursor: pointer; margin-top: 22px; transition: background 0.15s, transform 0.1s; font-family: inherit;
+    }
+    .btn-submit:hover { background: #fbbf24; }
+    .btn-submit:active { transform: scale(0.98); }
+    .form-divider { border: none; border-top: 1px solid #2d3448; margin: 24px 0; }
+    .login-link { text-align: center; font-size: 13px; color: #64748b; }
+    .login-link a { color: #f59e0b; text-decoration: none; font-weight: 600; }
+    .login-link a:hover { color: #fbbf24; }
+    .info-note {
+        padding: 10px 14px; background: rgba(245,158,11,0.07); border: 1px solid rgba(245,158,11,0.15);
+        border-radius: 8px; font-size: 12px; color: #94a3b8; margin-bottom: 22px;
+    }
+    .info-note strong { color: #f59e0b; }
+</style>
+
+    <h2 class="form-title">Create staff account</h2>
+    <p class="form-subtitle">Register an authorized operator or administrator</p>
+
+    <div class="info-note">
+        <strong>Note:</strong> Only authorized personnel should be registered. Contact your system administrator if you need access.
     </div>
 
-    <form method="POST" action="{{ route('register') }}" class="space-y-4">
+    <form method="POST" action="{{ route('register') }}">
         @csrf
 
         <!-- Name -->
-        <div>
-            <label for="name" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
-                {{ __('Full Name') }}
-            </label>
-            <div class="relative">
-                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-amber-400/70">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+        <div class="form-group">
+            <label for="name" class="form-label">Full Name</label>
+            <div class="input-wrap">
+                <span class="input-icon">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
                     </svg>
-                </div>
-                <input 
-                    id="name" 
-                    type="text" 
-                    name="name" 
-                    value="{{ old('name') }}" 
-                    required 
-                    autofocus 
-                    autocomplete="name"
-                    placeholder="e.g. Juan Dela Cruz"
-                    class="block w-full pl-11 pr-4 py-2.5 bg-black/40 border border-white/10 rounded-xl text-white placeholder-slate-500 text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition duration-150 shadow-inner"
-                />
+                </span>
+                <input id="name" type="text" name="name"
+                    value="{{ old('name') }}" required autofocus autocomplete="name"
+                    placeholder="e.g. Juan Dela Cruz" class="form-input">
             </div>
-            <x-input-error :messages="$errors->get('name')" class="mt-1.5 text-xs text-rose-400" />
+            @error('name')
+                <p class="form-error">{{ $message }}</p>
+            @enderror
         </div>
 
-        <!-- Email Address -->
-        <div>
-            <label for="email" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
-                {{ __('Email Address') }}
-            </label>
-            <div class="relative">
-                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-amber-400/70">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.206" />
+        <!-- Email -->
+        <div class="form-group">
+            <label for="email" class="form-label">Email Address</label>
+            <div class="input-wrap">
+                <span class="input-icon">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
                     </svg>
-                </div>
-                <input 
-                    id="email" 
-                    type="email" 
-                    name="email" 
-                    value="{{ old('email') }}" 
-                    required 
-                    autocomplete="username"
-                    placeholder="staff@ricemill.com"
-                    class="block w-full pl-11 pr-4 py-2.5 bg-black/40 border border-white/10 rounded-xl text-white placeholder-slate-500 text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition duration-150 shadow-inner"
-                />
+                </span>
+                <input id="email" type="email" name="email"
+                    value="{{ old('email') }}" required autocomplete="username"
+                    placeholder="staff@malapote.com" class="form-input">
             </div>
-            <x-input-error :messages="$errors->get('email')" class="mt-1.5 text-xs text-rose-400" />
+            @error('email')
+                <p class="form-error">{{ $message }}</p>
+            @enderror
         </div>
 
         <!-- Password -->
-        <div>
-            <label for="password" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
-                {{ __('Password') }}
-            </label>
-            <div class="relative">
-                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-amber-400/70">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+        <div class="form-group">
+            <label for="password" class="form-label">Password</label>
+            <div class="input-wrap">
+                <span class="input-icon">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                        <path d="M7 11V7a5 5 0 0110 0v4"/>
                     </svg>
-                </div>
-                <input 
-                    id="password" 
-                    type="password" 
-                    name="password" 
-                    required 
-                    autocomplete="new-password"
-                    placeholder="••••••••"
-                    class="block w-full pl-11 pr-4 py-2.5 bg-black/40 border border-white/10 rounded-xl text-white placeholder-slate-500 text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition duration-150 shadow-inner"
-                />
+                </span>
+                <input id="password" type="password" name="password"
+                    required autocomplete="new-password"
+                    placeholder="Min. 8 characters" class="form-input">
             </div>
-            <x-input-error :messages="$errors->get('password')" class="mt-1.5 text-xs text-rose-400" />
+            @error('password')
+                <p class="form-error">{{ $message }}</p>
+            @enderror
         </div>
 
         <!-- Confirm Password -->
-        <div>
-            <label for="password_confirmation" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
-                {{ __('Confirm Password') }}
-            </label>
-            <div class="relative">
-                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-amber-400/70">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        <div class="form-group">
+            <label for="password_confirmation" class="form-label">Confirm Password</label>
+            <div class="input-wrap">
+                <span class="input-icon">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                     </svg>
-                </div>
-                <input 
-                    id="password_confirmation" 
-                    type="password" 
-                    name="password_confirmation" 
-                    required 
-                    autocomplete="new-password"
-                    placeholder="••••••••"
-                    class="block w-full pl-11 pr-4 py-2.5 bg-black/40 border border-white/10 rounded-xl text-white placeholder-slate-500 text-sm focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition duration-150 shadow-inner"
-                />
+                </span>
+                <input id="password_confirmation" type="password" name="password_confirmation"
+                    required autocomplete="new-password"
+                    placeholder="Repeat password" class="form-input">
             </div>
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-1.5 text-xs text-rose-400" />
+            @error('password_confirmation')
+                <p class="form-error">{{ $message }}</p>
+            @enderror
         </div>
 
-        <!-- Submit Button -->
-        <div class="pt-3">
-            <button 
-                type="submit" 
-                class="w-full inline-flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 hover:brightness-110 text-slate-950 font-extrabold text-sm rounded-xl shadow-lg shadow-amber-500/20 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 focus:ring-offset-slate-900 transition duration-200 active:scale-[0.98]"
-            >
-                <span>Complete Registration</span>
-                <svg class="w-4 h-4 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-            </button>
-        </div>
-
-        <div class="text-center pt-3 border-t border-white/10 mt-5">
-            <p class="text-xs text-slate-400">
-                {{ __('Already have an account?') }}
-                <a href="{{ route('login') }}" class="font-bold text-amber-400 hover:text-amber-300 hover:underline ms-1">
-                    {{ __('Sign in instead') }}
-                </a>
-            </p>
-        </div>
+        <button type="submit" class="btn-submit">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <line x1="19" y1="8" x2="19" y2="14"/>
+                <line x1="22" y1="11" x2="16" y2="11"/>
+            </svg>
+            Create Account
+        </button>
     </form>
+
+    <hr class="form-divider">
+    <p class="login-link">Already have an account? <a href="{{ route('login') }}">Sign in</a></p>
+
 </x-guest-layout>

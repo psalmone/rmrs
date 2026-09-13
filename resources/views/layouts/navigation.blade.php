@@ -11,7 +11,7 @@
                                 <x-application-logo class="w-4 h-4 text-amber-400" />
                             </div>
                         </div>
-                        <span class="font-bold text-white text-sm">Malaptw <span class="text-amber-400">RiceMill</span></span>
+                        <span class="font-bold text-white text-sm">Malapote <span class="text-amber-400">Ricemill</span></span>
                     </a>
                 </div>
 
@@ -28,6 +28,9 @@
                     </x-nav-link>
                     <x-nav-link :href="route('sales.index')" :active="request()->routeIs('sales.*')" class="text-slate-300 hover:text-white border-amber-400">
                         {{ __('Sales / POS') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('inventory.index')" :active="request()->routeIs('inventory.*')" class="text-slate-300 hover:text-white border-amber-400">
+                        {{ __('Inventory') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -93,6 +96,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('sales.index')" :active="request()->routeIs('sales.*')">
                 {{ __('Sales / POS') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('inventory.index')" :active="request()->routeIs('inventory.*')">
+                {{ __('Inventory') }}
             </x-responsive-nav-link>
         </div>
 
